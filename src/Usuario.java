@@ -1,9 +1,9 @@
 public class Usuario {
     private String nombre;
     private String direccion;
-    private String telefono;
+    private long telefono;
 
-    public Usuario(String nombre, String direccion, String telefono) {
+    public Usuario(String nombre, String direccion, Long telefono) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
@@ -25,11 +25,20 @@ public class Usuario {
         this.direccion = direccion;
     }
 
-    public String getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nombre='" + nombre + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", telefono=" + telefono +
+                '}';
     }
 }

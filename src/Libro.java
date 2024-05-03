@@ -5,12 +5,11 @@ public class Libro {
     private boolean isActive;
     private int idLibro;
 
-    public Libro(String titulo, String autor, String anio, int idLibro) {
+    public Libro(String titulo, String autor, String anio) {
         this.titulo = titulo;
         this.autor = autor;
         this.anio = anio;
         this.isActive = true;
-        this.idLibro = idLibro;
     }
 
     public String getTitulo() {
