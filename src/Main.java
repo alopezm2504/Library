@@ -20,16 +20,30 @@ public class Main {
                     mostrarLista(libreria.usuarios);
                     break;
                 case "3":
-                    Libro libro=ingresarLibro();
+                    Libro libro = ingresarLibro();
                     libro.setIdLibro(libreria.getNewIdLibro());
                     libreria.libros.add(libro);
+                    JOptionPane.showMessageDialog(null, "el libro se creo correctamente");
+                    break;
+                case "4":
+                    for (Object object : libreria.libros) {
+                        if (!libro.isActive()){
+                            libreria.librosPrestados.add(libro);
+
+                        }
+
+
+                    }
+                    ;
+                    mostrarLista(libreria.librosPrestados);
+                    break;
                 default:
                     opcion = JOptionPane.showInputDialog(retornarMensaje());
 
             }
             opcion = JOptionPane.showInputDialog(retornarMensaje());
 
-        } while ( !opcion.equals("9"));
+        } while (!opcion.equals("9"));
 
     }
 
@@ -37,9 +51,8 @@ public class Main {
         String titulo = JOptionPane.showInputDialog("ingrese el titulo del libro");
         String autor = JOptionPane.showInputDialog("ingrese el autor del libro");
         String anio = JOptionPane.showInputDialog("ingrese el año en que se hizo");
-        Libro libro=new Libro(titulo,autor,anio);
+        Libro libro = new Libro(titulo, autor, anio);
         return libro;
-
 
 
     }
@@ -59,9 +72,10 @@ public class Main {
         return null;
 
     }
-    private static void mostrarLista(List<?> lista){
-        for (Object objects: lista) {
-            JOptionPane.showMessageDialog(null,objects);
+
+    private static void mostrarLista(List<?> lista) {
+        for (Object objects : lista) {
+            JOptionPane.showMessageDialog(null, objects);
         }
     }
 

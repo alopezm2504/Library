@@ -11,6 +11,11 @@ public class Libro {
         this.anio = anio;
         this.isActive = true;
     }
+    public Libro(){
+
+    }
+
+
 
     public String getTitulo() {
         return titulo;
