@@ -2,11 +2,21 @@ public class Usuario {
     private String nombre;
     private String direccion;
     private long telefono;
+    private String ced;
 
-    public Usuario(String nombre, String direccion, Long telefono) {
+    public Usuario(String nombre, String direccion, Long telefono,String ced) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.ced=ced;
+    }
+
+    public String getCed() {
+        return ced;
+    }
+
+    public void setCed(String ced) {
+        this.ced = ced;
     }
 
     public String getNombre() {

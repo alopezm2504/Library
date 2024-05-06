@@ -8,6 +8,7 @@ public class Libreria {
     public List<Transacion> transaciones;
     public List<Libro> librosPrestados;
 
+
     public Libreria(List<Libro> librosPrestados) {
         this.librosPrestados = librosPrestados;
     }
@@ -31,8 +32,23 @@ public class Libreria {
     public int getNewIdLibro() {
         return libros.size() + 1;
     }
-    public void prestarLibros(libro) {
-        //Libreria libreria=new Libreria();
+
+    public boolean buscarUsuario(String cedNew) {
+
+        for (Usuario usuario : usuarios) {
+            if (usuario.getCed().equals(cedNew)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void cambiarIdLibro(int idLibro) {
+        for (int i = 0; i < libros.size(); i++) {
+            if(libros.get(i).getIdLibro()==idLibro){
+                libros.get(i).setActive(false);
+            }
+        }
 
     }
 }

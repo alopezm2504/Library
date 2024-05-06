@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Main {
@@ -26,15 +27,15 @@ public class Main {
                     JOptionPane.showMessageDialog(null, "el libro se creo correctamente");
                     break;
                 case "4":
-                    for (Object object : libreria.libros) {
-                        if (!libro.isActive()){
-                            libreria.librosPrestados.add(libro);
-
-                        }
-
-
+                    String cedNew = JOptionPane.showInputDialog("Digite la cedula del usuario");
+                    boolean idUsuario = libreria.buscarUsuario(cedNew);
+                    if (idUsuario) {
+                        Libro libroPrestar = retornarMensaje4(libreria.libros);
+                        libroPrestar.setActive(false);
+                        libreria.librosPrestados.add(libroPrestar);
+                        libreria.cambiarIdLibro(libroPrestar.getIdLibro());
                     }
-                    ;
+
                     mostrarLista(libreria.librosPrestados);
                     break;
                 default:
@@ -43,8 +44,25 @@ public class Main {
             }
             opcion = JOptionPane.showInputDialog(retornarMensaje());
 
-        } while (!opcion.equals("9"));
+        } while (!opcion.equals("11"));
 
+    }
+
+    private static Libro retornarMensaje4(List<Libro> libros) {
+        String opcion4 = JOptionPane.showInputDialog("por favor digite el titulo del libro");
+        opcion4 = opcion4.toUpperCase();
+        String opcion5 = "";
+        for (Libro objet : libros) {
+            opcion5 = objet.getAutor().toUpperCase();
+            if (opcion5.contains(opcion4)) {
+
+                return objet;
+
+            }
+
+
+        }
+        return null;
     }
 
     private static Libro ingresarLibro() {
@@ -61,10 +79,11 @@ public class Main {
         String nombre = JOptionPane.showInputDialog("ingrese el nombre del usuario");
         String direccion = JOptionPane.showInputDialog("ingrese la direccion del usuario");
         String telefono = JOptionPane.showInputDialog("ingrese el telefono del usuario");
+        String ced = JOptionPane.showInputDialog("ingrese la cedula del usuario");
         long telefonoNew = 0L;
         try {
             telefonoNew = Long.parseLong(telefono);
-            Usuario usuario = new Usuario(nombre, direccion, telefonoNew);
+            Usuario usuario = new Usuario(nombre, direccion, telefonoNew, ced);
             return usuario;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "el telefono no es correcto");
@@ -84,12 +103,14 @@ public class Main {
                 "1. Ingresar usuario\n" +
                 "2. lista de usuarios\n" +
                 "3. Ingrese libro\n" +
-                "4. lista de libros prestados\n" +
-                "5. lista de libros en tienda \n" +
-                "6. lista de usuarios con libros prestados\n" +
-                "7. prestamo vencidos \n" +
-                "8. usuarios con mas de un libro\n" +
-                "9. Salir\n";
+                "4. Prestar libro\n" +
+                "5. lista de libros prestados\n" +
+                "6. Devolucion de libros prestados\n" +
+                "7. lista de libros en tienda \n" +
+                "8. lista de usuarios con libros prestados\n" +
+                "9. prestamo vencidos \n" +
+                "10. usuarios con mas de un libro\n" +
+                "11. Salir\n";
 
     }
 
