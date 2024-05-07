@@ -28,23 +28,50 @@ public class Main {
                     break;
                 case "4":
                     String cedNew = JOptionPane.showInputDialog("Digite la cedula del usuario");
+                    String prestarDevolver = JOptionPane.showInputDialog("digite segun la opcion que desee\n 1. para prestar \n 2. para devolver");
                     boolean idUsuario = libreria.buscarUsuario(cedNew);
-                    if (idUsuario) {
+                    if (idUsuario && prestarDevolver.equals("1")) {
                         Libro libroPrestar = retornarMensaje4(libreria.libros);
-                        libroPrestar.setActive(false);
+                        if (Objects.isNull(libroPrestar)) {
+                            JOptionPane.showMessageDialog(null, "el libro no existe");
+                            break;
+                        }
                         libreria.librosPrestados.add(libroPrestar);
-                        libreria.cambiarIdLibro(libroPrestar.getIdLibro());
-                    }
+                        libreria.cambiarEstadoLibro(libroPrestar.getIdLibro());
+                        JOptionPane.showMessageDialog(null, "el libro se presto con exito que disfrute la lectura");
+                    } else if (idUsuario && prestarDevolver.equals("2")) {
+                        Libro libroDevolver = retornarMensaje4(libreria.libros);
+                        if (Objects.isNull(libroDevolver)) {
+                            JOptionPane.showMessageDialog(null, "el libro no existe");
+                            break;
+                        }
+                        libreria.librosPrestados.remove(libroDevolver);
+                        libreria.cambiarEstadoLibro(libroDevolver.getIdLibro());
 
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "el usuario no esta registrado");
+                    }
+                    break;
+                case "5":
                     mostrarLista(libreria.librosPrestados);
                     break;
+                case "6":
+                    for (int i = 0; i < libreria.libros.size(); i++) {
+                        if(libreria.libros.get(i).isActive()){
+                            JOptionPane.showMessageDialog(null,libreria.libros.get(i));
+                        }
+                    }
+
+                    break;
+
                 default:
                     opcion = JOptionPane.showInputDialog(retornarMensaje());
 
             }
             opcion = JOptionPane.showInputDialog(retornarMensaje());
 
-        } while (!opcion.equals("11"));
+        } while (!opcion.equals("10"));
 
     }
 
@@ -53,7 +80,7 @@ public class Main {
         opcion4 = opcion4.toUpperCase();
         String opcion5 = "";
         for (Libro objet : libros) {
-            opcion5 = objet.getAutor().toUpperCase();
+            opcion5 = objet.getTitulo().toUpperCase();
             if (opcion5.contains(opcion4)) {
 
                 return objet;
@@ -103,14 +130,13 @@ public class Main {
                 "1. Ingresar usuario\n" +
                 "2. lista de usuarios\n" +
                 "3. Ingrese libro\n" +
-                "4. Prestar libro\n" +
+                "4. Prestar libro o devolver libro\n" +
                 "5. lista de libros prestados\n" +
-                "6. Devolucion de libros prestados\n" +
-                "7. lista de libros en tienda \n" +
-                "8. lista de usuarios con libros prestados\n" +
-                "9. prestamo vencidos \n" +
-                "10. usuarios con mas de un libro\n" +
-                "11. Salir\n";
+                "6. lista de libros en tienda \n" +
+                "7. lista de usuarios con libros prestados\n" +
+                "8. prestamo vencidos \n" +
+                "9. usuarios con mas de un libro\n" +
+                "10. Salir\n";
 
     }
 
