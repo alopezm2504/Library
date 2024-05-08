@@ -9,6 +9,7 @@ public class Libreria {
     public List<Libro> librosPrestados;
 
 
+
     public Libreria(List<Libro> librosPrestados) {
         this.librosPrestados = librosPrestados;
     }
@@ -29,8 +30,15 @@ public class Libreria {
         libro3.setIdLibro(3);
         Libro libro4 = new Libro("La iliada", "Homero", "1942");
         libro4.setIdLibro(4);
-        return List.of(libro1, libro2, libro3, libro4);
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(libro1);
+        arrayList.add(libro2);
+        arrayList.add(libro3);
+        arrayList.add(libro4);
+
+        return arrayList;
     }
+
 
     public boolean crearUsuario(Usuario usuario) {
         if (!Objects.isNull(usuario) && !Objects.isNull(usuario.getNombre()) && !usuario.getNombre().equals("")) {
@@ -45,14 +53,27 @@ public class Libreria {
         return libros.size() + 1;
     }
 
-    public boolean buscarUsuario(String cedNew) {
+    public void cambiarEstadoUsuario(String cedNew) {
+
+        for (Usuario usuario : usuarios) {
+            if (usuario.getCed().equals(cedNew)){
+                usuario.librosPrestados = !usuario.librosPrestados;
+            }
+
+
+        }
+
+    }
+
+
+    public Usuario buscarUsuario(String cedNew) {
 
         for (Usuario usuario : usuarios) {
             if (usuario.getCed().equals(cedNew)) {
-                return true;
+                return usuario;
             }
         }
-        return false;
+        return null;
     }
 
     public void cambiarEstadoLibro(int idLibro) {
@@ -62,7 +83,7 @@ public class Libreria {
             } else if (libros.get(i).getIdLibro() == idLibro && prestarDevolver.equals("2")) {
                 libros.get(i).setActive(true);
             }*/
-            if (libros.get(i).getIdLibro() == idLibro){
+            if (libros.get(i).getIdLibro() == idLibro) {
                 libros.get(i).setActive(!libros.get(i).isActive());
             }
         }

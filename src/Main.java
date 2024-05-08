@@ -1,6 +1,6 @@
 import javax.swing.*;
+import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 public class Main {
@@ -29,18 +29,22 @@ public class Main {
                 case "4":
                     String cedNew = JOptionPane.showInputDialog("Digite la cedula del usuario");
                     String prestarDevolver = JOptionPane.showInputDialog("digite segun la opcion que desee\n 1. para prestar \n 2. para devolver");
-                    boolean idUsuario = libreria.buscarUsuario(cedNew);
-                    if (idUsuario && prestarDevolver.equals("1")) {
+                    Usuario usuario = libreria.buscarUsuario(cedNew);
+                    if (Objects.nonNull(usuario) && prestarDevolver.equals("1")) {
+
                         Libro libroPrestar = retornarMensaje4(libreria.libros);
+                        libreria.cambiarEstadoUsuario(cedNew);
                         if (Objects.isNull(libroPrestar)) {
                             JOptionPane.showMessageDialog(null, "el libro no existe");
                             break;
                         }
                         libreria.librosPrestados.add(libroPrestar);
+                        libreria.transaciones.add(new Transacion(libroPrestar,usuario,new Date()));
                         libreria.cambiarEstadoLibro(libroPrestar.getIdLibro());
                         JOptionPane.showMessageDialog(null, "el libro se presto con exito que disfrute la lectura");
-                    } else if (idUsuario && prestarDevolver.equals("2")) {
+                    } else if (Objects.nonNull(usuario) && prestarDevolver.equals("2")) {
                         Libro libroDevolver = retornarMensaje4(libreria.libros);
+                        libreria.cambiarEstadoUsuario(cedNew);
                         if (Objects.isNull(libroDevolver)) {
                             JOptionPane.showMessageDialog(null, "el libro no existe");
                             break;
@@ -57,6 +61,7 @@ public class Main {
                     mostrarLista(libreria.librosPrestados);
                     break;
                 case "6":
+
                     for (int i = 0; i < libreria.libros.size(); i++) {
                         if(libreria.libros.get(i).isActive()){
                             JOptionPane.showMessageDialog(null,libreria.libros.get(i));
@@ -64,6 +69,16 @@ public class Main {
                     }
 
                     break;
+                case "7":
+                    for (int i = 0; i < libreria.usuarios.size(); i++) {
+                        if(libreria.usuarios.get(i).librosPrestados){
+                            JOptionPane.showMessageDialog(null,libreria.usuarios.get(i));
+                        }
+                    }
+
+                    break;
+
+
 
                 default:
                     opcion = JOptionPane.showInputDialog(retornarMensaje());
