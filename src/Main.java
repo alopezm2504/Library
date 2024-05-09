@@ -1,10 +1,12 @@
 import javax.swing.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         String opcion = JOptionPane.showInputDialog(retornarMensaje());
         Libreria libreria = new Libreria();
         do {
@@ -39,7 +41,7 @@ public class Main {
                             break;
                         }
                         libreria.librosPrestados.add(libroPrestar);
-                        libreria.transaciones.add(new Transacion(libroPrestar,usuario,new Date()));
+                        libreria.transaciones.add(new Transacion(libroPrestar, usuario, new Date()));
                         libreria.cambiarEstadoLibro(libroPrestar.getIdLibro());
                         JOptionPane.showMessageDialog(null, "el libro se presto con exito que disfrute la lectura");
                     } else if (Objects.nonNull(usuario) && prestarDevolver.equals("2")) {
@@ -51,6 +53,10 @@ public class Main {
                         }
                         libreria.librosPrestados.remove(libroDevolver);
                         libreria.cambiarEstadoLibro(libroDevolver.getIdLibro());
+                        String fechaEntrega = JOptionPane.showInputDialog("digite la fecha de entrega\ncon el siguiente formato\n dd/mm/yy ");
+                        SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yy");
+                        Date fechaFormateada = formato.parse(fechaEntrega);
+                        libreria.transaciones.add(new Transacion(libroDevolver, usuario, fechaFormateada));
 
 
                     } else {
@@ -63,21 +69,23 @@ public class Main {
                 case "6":
 
                     for (int i = 0; i < libreria.libros.size(); i++) {
-                        if(libreria.libros.get(i).isActive()){
-                            JOptionPane.showMessageDialog(null,libreria.libros.get(i));
+                        if (libreria.libros.get(i).isActive()) {
+                            JOptionPane.showMessageDialog(null, libreria.libros.get(i));
                         }
                     }
 
                     break;
                 case "7":
                     for (int i = 0; i < libreria.usuarios.size(); i++) {
-                        if(libreria.usuarios.get(i).librosPrestados){
-                            JOptionPane.showMessageDialog(null,libreria.usuarios.get(i));
+                        if (libreria.usuarios.get(i).librosPrestados) {
+                            JOptionPane.showMessageDialog(null, libreria.usuarios.get(i));
                         }
                     }
 
                     break;
-
+                case "8":
+                    mostrarLista(libreria.transaciones);
+                    break;
 
 
                 default:

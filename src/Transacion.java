@@ -11,4 +11,36 @@ public class Transacion {
         this.fecha = fecha;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Libro getLibro() {
+        return libro;
+    }
+
+    public void setLibro(Libro libro) {
+        this.libro = libro;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    @Override
+    public String toString() {
+        return "Transacion{" +
+                "libro=" + libro +
+                ", usuario=" + usuario +
+                ", fecha=" + fecha +
+                '}';
+    }
 }
