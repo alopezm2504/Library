@@ -85,6 +85,7 @@ public class Main {
                     break;
                 case "8":
                     mostrarLista(libreria.transaciones);
+                    libreria.diferenciaDias();
                     break;
 
 

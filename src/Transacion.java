@@ -11,6 +11,7 @@ public class Transacion {
         this.fecha = fecha;
     }
 
+
     public Usuario getUsuario() {
         return usuario;
     }

@@ -1,4 +1,6 @@
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,7 +9,6 @@ public class Libreria {
     public List<Usuario> usuarios;
     public List<Transacion> transaciones;
     public List<Libro> librosPrestados;
-
 
 
     public Libreria(List<Libro> librosPrestados) {
@@ -19,6 +20,24 @@ public class Libreria {
         this.usuarios = new ArrayList<>();
         this.transaciones = new ArrayList<>();
         this.librosPrestados = new ArrayList<>();
+    }
+
+    public void diferenciaDias() {
+        for (int i = 0; i < transaciones.size(); i++) {
+            for (int j = 0; j < transaciones.size(); j++) {
+                if (transaciones.get(i).getUsuario() == transaciones.get(j).getUsuario() && !transaciones.get(i).getLibro().isActive() ) {
+                    long diferencia = transaciones.get(i).getFecha().getTime() - transaciones.get(j).getFecha().getTime();
+                    //long fechaInicial=fechaPrestamo.getTime();
+                    //long fechaFinal=fechaDevolucion.getTime();
+                    double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                    JOptionPane.showMessageDialog(null,"el pretamo del libro lleva" + dias);
+                }
+            }
+
+
+        }
+
+
     }
 
     private List<Libro> llenarLibros() {
@@ -56,7 +75,7 @@ public class Libreria {
     public void cambiarEstadoUsuario(String cedNew) {
 
         for (Usuario usuario : usuarios) {
-            if (usuario.getCed().equals(cedNew)){
+            if (usuario.getCed().equals(cedNew)) {
                 usuario.librosPrestados = !usuario.librosPrestados;
             }
 
