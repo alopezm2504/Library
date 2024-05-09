@@ -77,7 +77,7 @@ public class Main {
                     break;
                 case "7":
                     for (int i = 0; i < libreria.usuarios.size(); i++) {
-                        if (libreria.usuarios.get(i).librosPrestados) {
+                        if (libreria.usuarios.get(i).prestoLibros) {
                             JOptionPane.showMessageDialog(null, libreria.usuarios.get(i));
                         }
                     }

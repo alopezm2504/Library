@@ -23,18 +23,16 @@ public class Libreria {
     }
 
     public void diferenciaDias() {
-        for (int i = 0; i < transaciones.size(); i++) {
-            for (int j = 0; j < transaciones.size(); j++) {
-                if (transaciones.get(i).getUsuario() == transaciones.get(j).getUsuario() && !transaciones.get(i).getLibro().isActive() ) {
-                    long diferencia = transaciones.get(i).getFecha().getTime() - transaciones.get(j).getFecha().getTime();
-                    //long fechaInicial=fechaPrestamo.getTime();
-                    //long fechaFinal=fechaDevolucion.getTime();
-                    double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-                    JOptionPane.showMessageDialog(null,"el pretamo del libro lleva" + dias);
-                }
+        for (int i = 0; i < librosPrestados.size(); i++) {
+
+            if (!librosPrestados.get(i).isActive() && usuarios.get(i).prestoLibros) {
+               // String fechaFinal
+                long diferencia = transaciones.get(i).getFecha().getTime()  ;
+                //long fechaInicial=fechaPrestamo.getTime();
+                //
+                double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                JOptionPane.showMessageDialog(null, "el pretamo del libro lleva" + dias);
             }
-
-
         }
 
 
@@ -76,7 +74,7 @@ public class Libreria {
 
         for (Usuario usuario : usuarios) {
             if (usuario.getCed().equals(cedNew)) {
-                usuario.librosPrestados = !usuario.librosPrestados;
+                usuario.prestoLibros = !usuario.prestoLibros;
             }
 
 

@@ -3,14 +3,14 @@ public class Usuario {
     private String direccion;
     private long telefono;
     private String ced;
-    public boolean librosPrestados;
+    public boolean prestoLibros;
 
     public Usuario(String nombre, String direccion, Long telefono, String ced) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.ced=ced;
-        this.librosPrestados = false;
+        this.prestoLibros = false;
     }
 
     public String getCed() {
