@@ -8,12 +8,10 @@ public class Libreria {
     public List<Libro> libros;
     public List<Usuario> usuarios;
     public List<Transacion> transaciones;
-    public List<Libro> librosPrestados;
+    public List<List<Object>> librosPrestados;
 
 
-    public Libreria(List<Libro> librosPrestados) {
-        this.librosPrestados = librosPrestados;
-    }
+
 
     public Libreria() {
         this.libros = llenarLibros();
@@ -22,20 +20,25 @@ public class Libreria {
         this.librosPrestados = new ArrayList<>();
     }
 
-    public void diferenciaDias() {
-        for (int i = 0; i < librosPrestados.size(); i++) {
 
-            if (!librosPrestados.get(i).isActive() && usuarios.get(i).prestoLibros) {
-               // String fechaFinal
-                long diferencia = transaciones.get(i).getFecha().getTime()  ;
-                //long fechaInicial=fechaPrestamo.getTime();
-                //
-                double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-                JOptionPane.showMessageDialog(null, "el pretamo del libro lleva" + dias);
+
+
+
+    public void recorrerLista(){
+        for (List<Object> listaInterna: librosPrestados) {
+            for (Object objeto: listaInterna) {
+                 if(objeto instanceof Libro){
+                   boolean prestado=false;
+
+                 } else if (objeto instanceof Usuario) {
+
+                 } else {
+
+                 }
+
+
             }
         }
-
-
     }
 
     private List<Libro> llenarLibros() {

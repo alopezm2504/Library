@@ -40,8 +40,8 @@ public class Main {
                             JOptionPane.showMessageDialog(null, "el libro no existe");
                             break;
                         }
-                        libreria.librosPrestados.add(libroPrestar);
-                        libreria.transaciones.add(new Transacion(libroPrestar, usuario, new Date()));
+                        libreria.librosPrestados.add(List.of(usuario,libroPrestar,new Date()));
+                        //libreria.transaciones.add(new Transacion(libroPrestar, usuario, new Date()));
                         libreria.cambiarEstadoLibro(libroPrestar.getIdLibro());
                         JOptionPane.showMessageDialog(null, "el libro se presto con exito que disfrute la lectura");
                     } else if (Objects.nonNull(usuario) && prestarDevolver.equals("2")) {
@@ -51,12 +51,13 @@ public class Main {
                             JOptionPane.showMessageDialog(null, "el libro no existe");
                             break;
                         }
-                        libreria.librosPrestados.remove(libroDevolver);
+
                         libreria.cambiarEstadoLibro(libroDevolver.getIdLibro());
                         String fechaEntrega = JOptionPane.showInputDialog("digite la fecha de entrega\ncon el siguiente formato\n dd/mm/yy ");
                         SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yy");
                         Date fechaFormateada = formato.parse(fechaEntrega);
-                        libreria.transaciones.add(new Transacion(libroDevolver, usuario, fechaFormateada));
+                        //libreria.librosPrestados.remove(List.of(libroDevolver,usuario,fechaFormateada));
+                        //libreria.transaciones.add(new Transacion(libroDevolver, usuario, fechaFormateada));
 
 
                     } else {
@@ -64,7 +65,11 @@ public class Main {
                     }
                     break;
                 case "5":
-                    mostrarLista(libreria.librosPrestados);
+                    for (int i = 0; i < libreria.libros.size(); i++) {
+                        if (!libreria.libros.get(i).isActive()) {
+                            JOptionPane.showMessageDialog(null, libreria.libros.get(i));
+                        }
+                    }
                     break;
                 case "6":
 
@@ -84,8 +89,8 @@ public class Main {
 
                     break;
                 case "8":
-                    mostrarLista(libreria.transaciones);
-                    libreria.diferenciaDias();
+                    mostrarLista(libreria.librosPrestados);
+                    libreria.recorrerLista();
                     break;
 
 
