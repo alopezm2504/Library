@@ -1,8 +1,5 @@
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Libreria {
     public List<Libro> libros;
@@ -41,6 +38,46 @@ public class Libreria {
         }
     }
 
+    public void recorrerLista2(Date fechaControl){
+        for (int i = librosPrestados.size()-1; i >=0 ; i--) {
+            for (Object objeto: librosPrestados.get(i)) {
+                if(objeto instanceof Libro){
+                    if(!((Libro) objeto).isActive()){
+                        boolean prestado=((Libro) objeto).isActive();
+                    }
+                } else if (objeto instanceof Usuario) {
+
+                } else {
+                   long diasPrestamo= diasEntreDosFechas(((Date) objeto), fechaControl);
+                   JOptionPane.showMessageDialog(null,"los dias vencidos son: "+diasPrestamo);
+                }
+            }
+        }
+        for (List<Object> listaInterna: librosPrestados) {
+            for (Object objeto: listaInterna) {
+                if(objeto instanceof Libro){
+                    boolean prestado=false;
+
+                } else if (objeto instanceof Usuario) {
+
+                } else {
+
+                }
+
+
+            }
+        }
+    }
+
+    public static long diasEntreDosFechas(Date fechaDesde, Date fechaHasta){
+        long startTime = fechaDesde.getTime() ;
+        long endTime = fechaHasta.getTime();
+        long diasDesde = (long) Math.floor(startTime / (1000*60*60*24)); // convertimos a dias, para que no afecten cambios de hora
+        long diasHasta = (long) Math.floor(endTime / (1000*60*60*24)); // convertimos a dias, para que no afecten cambios de hora
+        long dias = diasHasta - diasDesde;
+
+        return dias;
+    }
     private List<Libro> llenarLibros() {
         Libro libro1 = new Libro("El lobo estepario", "Hess", "1942");
         libro1.setIdLibro(1);

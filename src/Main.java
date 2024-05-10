@@ -90,7 +90,10 @@ public class Main {
                     break;
                 case "8":
                     mostrarLista(libreria.librosPrestados);
-                    libreria.recorrerLista();
+                    String fechaControl=JOptionPane.showInputDialog("digite la fecha \n use este formato dd/mm/yy ");
+                    SimpleDateFormat fechaFormateada= new SimpleDateFormat("dd/MM/yyyy");
+                    Date fecha= fechaFormateada.parse(fechaControl);
+                    libreria.recorrerLista2(fecha);
                     break;
 
 
