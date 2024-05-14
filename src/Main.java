@@ -56,7 +56,7 @@ public class Main {
                         String fechaEntrega = JOptionPane.showInputDialog("digite la fecha de entrega\ncon el siguiente formato\n dd/mm/yy ");
                         SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yy");
                         Date fechaFormateada = formato.parse(fechaEntrega);
-                        //libreria.librosPrestados.remove(List.of(libroDevolver,usuario,fechaFormateada));
+                        libreria.librosPrestados.remove(List.of(libroDevolver,usuario,fechaFormateada));
                         //libreria.transaciones.add(new Transacion(libroDevolver, usuario, fechaFormateada));
 
 
@@ -89,11 +89,12 @@ public class Main {
 
                     break;
                 case "8":
-                    mostrarLista(libreria.librosPrestados);
+                   // mostrarLista(libreria.librosPrestados);
                     String fechaControl=JOptionPane.showInputDialog("digite la fecha \n use este formato dd/mm/yy ");
                     SimpleDateFormat fechaFormateada= new SimpleDateFormat("dd/MM/yyyy");
                     Date fecha= fechaFormateada.parse(fechaControl);
                     libreria.recorrerLista2(fecha);
+                    mostrarLista(libreria.librosVencidos);
                     break;
 
 

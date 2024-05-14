@@ -6,7 +6,7 @@ public class Libreria {
     public List<Usuario> usuarios;
     public List<Transacion> transaciones;
     public List<List<Object>> librosPrestados;
-
+    public List<List<Object>>librosVencidos;
 
 
 
@@ -15,6 +15,7 @@ public class Libreria {
         this.usuarios = new ArrayList<>();
         this.transaciones = new ArrayList<>();
         this.librosPrestados = new ArrayList<>();
+        this.librosVencidos= new ArrayList<>();
     }
 
 
@@ -44,29 +45,21 @@ public class Libreria {
                 if(objeto instanceof Libro){
                     if(!((Libro) objeto).isActive()){
                         boolean prestado=((Libro) objeto).isActive();
+
                     }
                 } else if (objeto instanceof Usuario) {
 
                 } else {
                    long diasPrestamo= diasEntreDosFechas(((Date) objeto), fechaControl);
                    JOptionPane.showMessageDialog(null,"los dias vencidos son: "+diasPrestamo);
+                   if(diasPrestamo>=30 ){
+                       this.librosVencidos.add(librosPrestados.get(i));
+                   }
                 }
             }
         }
-        for (List<Object> listaInterna: librosPrestados) {
-            for (Object objeto: listaInterna) {
-                if(objeto instanceof Libro){
-                    boolean prestado=false;
-
-                } else if (objeto instanceof Usuario) {
-
-                } else {
-
-                }
 
 
-            }
-        }
     }
 
     public static long diasEntreDosFechas(Date fechaDesde, Date fechaHasta){
