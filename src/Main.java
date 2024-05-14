@@ -40,7 +40,8 @@ public class Main {
                             JOptionPane.showMessageDialog(null, "el libro no existe");
                             break;
                         }
-                        libreria.librosPrestados.add(List.of(usuario,libroPrestar,new Date()));
+                        libreria.librosPrestados.add(List.of(libroPrestar
+                                ,usuario,new Date()));
                         //libreria.transaciones.add(new Transacion(libroPrestar, usuario, new Date()));
                         libreria.cambiarEstadoLibro(libroPrestar.getIdLibro());
                         JOptionPane.showMessageDialog(null, "el libro se presto con exito que disfrute la lectura");
@@ -56,7 +57,7 @@ public class Main {
                         String fechaEntrega = JOptionPane.showInputDialog("digite la fecha de entrega\ncon el siguiente formato\n dd/mm/yy ");
                         SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yy");
                         Date fechaFormateada = formato.parse(fechaEntrega);
-                        libreria.librosPrestados.remove(List.of(libroDevolver,usuario,fechaFormateada));
+                        libreria.removerLibrosPrestados(usuario.getCed(),libroDevolver.getIdLibro());
                         //libreria.transaciones.add(new Transacion(libroDevolver, usuario, fechaFormateada));
 
 
@@ -96,6 +97,7 @@ public class Main {
                     libreria.recorrerLista2(fecha);
                     mostrarLista(libreria.librosVencidos);
                     break;
+
 
 
                 default:

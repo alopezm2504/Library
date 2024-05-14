@@ -18,26 +18,6 @@ public class Libro {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
-    public String getAnio() {
-        return anio;
-    }
-
-    public void setAnio(String anio) {
-        this.anio = anio;
-    }
-
     public boolean isActive() {
         return isActive;
     }

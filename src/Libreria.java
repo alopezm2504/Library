@@ -22,22 +22,7 @@ public class Libreria {
 
 
 
-    public void recorrerLista(){
-        for (List<Object> listaInterna: librosPrestados) {
-            for (Object objeto: listaInterna) {
-                 if(objeto instanceof Libro){
-                   boolean prestado=false;
 
-                 } else if (objeto instanceof Usuario) {
-
-                 } else {
-
-                 }
-
-
-            }
-        }
-    }
 
     public void recorrerLista2(Date fechaControl){
         for (int i = librosPrestados.size()-1; i >=0 ; i--) {
@@ -138,6 +123,30 @@ public class Libreria {
             }
         }
 
+    }
+
+    public void removerLibrosPrestados(String ced, int idLibro) {
+        boolean aux=false;
+        int conta = -1;
+        for (int i = librosPrestados.size()-1; i >=0 ; i--) {
+            for (Object objeto : librosPrestados.get(i)) {
+                if (objeto instanceof Libro) {
+                    if (((Libro) objeto).getIdLibro() == idLibro) {
+                        aux = true;
+
+                    }
+                } else if (objeto instanceof Usuario) {
+                    if (((Usuario) objeto).getCed().equals(ced) && aux) {
+                        conta = i;
+                        break;
+                    }
+                }
+            }
+            if (conta >= 0) {
+                librosPrestados.remove(conta);
+                break;
+            }
+        }
     }
 }
 
